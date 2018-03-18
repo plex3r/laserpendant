@@ -1,6 +1,9 @@
 #include <Wire.h>
 #include <VL6180X.h>
 #include <EEPROM.h>
+#include "AccelStepper.h" 
+
+AccelStepper Zaxis(1, 5, 9); // pin 5 = step, pin 8 = direction
 
 // variables will change:
   const int numReadings = 100;
@@ -23,6 +26,8 @@
   VL6180X sensor;
 // the setup function runs once when you press reset or power the board
 void setup() {
+  Zaxis.setMaxSpeed(400);
+  Zaxis.setSpeed(80);
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
      readings[thisReading] = 0;
   }
@@ -91,9 +96,9 @@ void loop() {
    if (calibrated == 1) {
    // calculate the average:
    average = total / numReadings;
-   Serial.println("Sensor Average Value: ");
-   Serial.println(average);
-   Serial.println("\r\n");
+   Serial.print("Sensor Average Value: ");
+   Serial.print(average);
+   Serial.print("\r\n");
    EEPROM.write(0, average);
    calibrated=!calibrated;
    }
