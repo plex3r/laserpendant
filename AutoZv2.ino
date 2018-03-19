@@ -3,7 +3,9 @@
 #include <EEPROM.h>
 #include "AccelStepper.h" 
 
-AccelStepper Zaxis(1, 5, 9); // pin 5 = step, pin 8 = direction
+AccelStepper Xaxis(1, 5, 9); // pin 5 = step, pin 8 = direction
+AccelStepper Yaxis(1, 6, 10); // pin 5 = step, pin 8 = direction
+AccelStepper Zaxis(1, 7, 11); // pin 5 = step, pin 8 = directio
 
 // variables will change:
   const int numReadings = 100;
